@@ -1,4 +1,5 @@
 # Networking-Projects
+Assignments completed for my computer networking class. The original assignment specification is included within each of the assignment folders.
 ***
 ## Assn3
 #### FTP client program using Apache Commons Net
@@ -41,7 +42,30 @@ java TCPClient <server IP> <message>
 (Tested using an AWS EC2 server running Ubuntu 16.04)
 
 ## Assn6
-#### 
+#### RMI client/server program
+
+Remote method invocation practice. Provides two methods (fibonacci and factorial) that can be called from the server using RMI.
+
+Start RMI registry (on Linux) with: 
+``` 
+rmiregistry &
+```
+
+Compile and run with:
+```
+javac *.java
+java Assn6Server 127.0.0.1
+java Assn6Client rmi://127.0.0.1/cecs327 <factorial OR fibonacci> <non-negative integer>
+```
 
 ## Assn7
-#### 
+#### Chat program using JGroups
+(Adapted from JGroups tutorial: http://jgroups.org/tutorial/)
+
+Group chat application that allows multiple people to join and send/receive messages.
+
+Compile and run with:
+```
+javac -cp "jgroups-3.6.15.Final.jar" SimpleChat.java
+java -cp ".:jgroups-3.6.15.Final.jar" SimpleChat <username>
+```
