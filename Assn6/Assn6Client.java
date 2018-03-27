@@ -5,6 +5,7 @@ public class Assn6Client {
         MethodInterface method;
         try {
 
+            // Input validation: checking the number of arguments
             if(args.length != 3){
                 System.out.println("Incorrect number of arguments. The arguments should be:");
                 System.out.println("{RMI location} factorial {number} OR {RMI location} fibonnaci {number}\n");
@@ -14,6 +15,7 @@ public class Assn6Client {
             method = (MethodInterface)Naming.lookup(args[0]);
 
             int input = 0;
+            // More input validation: checking the number is valid
             try {
                 input = Integer.valueOf(args[2]);
                 if (input < 0) throw new NumberFormatException();
@@ -22,6 +24,7 @@ public class Assn6Client {
                 return;
             }
 
+            // Running the method and printing the result
             if(args[1].equals("factorial")) {
                 System.out.println("The factorial of " +args[2] +" is " +method.factorial(input) +".\n");
             }
@@ -33,7 +36,7 @@ public class Assn6Client {
             }
 
         } catch(Exception e) {
-            System.out.println("Client error: " +e +".\n");
+            System.out.println("Client error: " +e.getMessage() +"\n");
         }
     }
 }

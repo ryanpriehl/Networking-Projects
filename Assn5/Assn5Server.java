@@ -3,8 +3,8 @@ import java.io.*;
 
 public class Assn5Server {
     public static void main (String args[]) {
-
-        try{
+        try {
+            // Getting connection to client
             int serverPort = 7896;
             ServerSocket listenSocket = new ServerSocket(serverPort);
             while(true) {
@@ -12,7 +12,7 @@ public class Assn5Server {
                 Connection c = new Connection(clientSocket);
             }
         } catch(IOException e) {
-            System.out.println("Listen :"+e.getMessage());
+            System.out.println("Listen error:" +e.getMessage());
         }
     }
 }
@@ -27,15 +27,16 @@ class Connection extends Thread {
         try {
             clientSocket = aClientSocket;
             in = new DataInputStream( clientSocket.getInputStream());
-            out =new DataOutputStream( clientSocket.getOutputStream());
+            out = new DataOutputStream( clientSocket.getOutputStream());
             this.start();
         } catch(IOException e) {
-            System.out.println("Connection:"+e.getMessage());
+            System.out.println("Connection error:" +e.getMessage());
         }
     }
 
     public void run(){
-        try { // an echo server
+        try {
+            // Getting message from client
             String data = in.readUTF();
             System.out.println("Received message \"" +data +"\". Sending reverse.");
 
@@ -48,16 +49,17 @@ class Connection extends Thread {
             }
             String newString = new String(dataArray);
 
+            // Replying to client with reversed string
             out.writeUTF(newString);
         } catch(EOFException e) {
-            System.out.println("EOF:"+e.getMessage());
+            System.out.println("EOF error:" +e.getMessage());
         } catch(IOException e) {
-            System.out.println("IO:"+e.getMessage());
+            System.out.println("IO error:" +e.getMessage());
         } finally {
             try {
                 clientSocket.close();
             } catch (IOException e) {
-                /*close failed*/
+                System.out.println("Close error:" +e.getMessage());
             }
         }
     }

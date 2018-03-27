@@ -5,6 +5,7 @@ public class Method extends UnicastRemoteObject implements MethodInterface {
 
     public Method() throws RemoteException { }
 
+    // Recursively computes the nth Fibonacci number
     public int fibonacci(int num) {
         if (num == 0 || num == 1) {
             return 1;
@@ -15,6 +16,7 @@ public class Method extends UnicastRemoteObject implements MethodInterface {
         }
     }
 
+    // Recursively computes the factorial of a number
     public int factorial(int num) {
         if(num == 0 || num == 1){
             return 1;

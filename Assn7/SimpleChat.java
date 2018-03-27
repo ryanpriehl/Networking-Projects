@@ -5,13 +5,15 @@ import org.jgroups.Message;
 import org.jgroups.ReceiverAdapter;
 import org.jgroups.View;
 
-// From tutorial: http://jgroups.org/tutorial/
+// Adapted from tutorial: http://jgroups.org/tutorial/
 public class SimpleChat extends ReceiverAdapter {
 
     JChannel channel;
     static String username;
 
     public static void main(String[] args) throws Exception {
+
+        // Uses first argument as username if it's present, otherwise uses system username
         if (args.length != 0)
             username = args[0];
         else
@@ -35,6 +37,7 @@ public class SimpleChat extends ReceiverAdapter {
                 System.out.flush();
                 String line = in.readLine();
                 String quitCheck = line.toLowerCase();
+                // Check for exit commands
                 if(quitCheck.startsWith("quit") || quitCheck.startsWith("exit"))
                     break;
                 line = "[" +username +"]: " + line;
@@ -47,10 +50,12 @@ public class SimpleChat extends ReceiverAdapter {
     }
 
     public void viewAccepted(View view) {
+        // Prints whenever someone enters or leaves the group chat
         System.out.println("\nView: " +view +"\n");
     }
 
     public void receive(Message msg) {
+        // Gets and prints messages from others
         if(msg.getSrc().equals(channel.getAddress())) return;
         System.out.println("\t\t\t" +msg.getSrc() +" " +msg.getObject());
     }

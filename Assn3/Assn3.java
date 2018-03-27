@@ -25,6 +25,11 @@ import org.apache.commons.net.io.CopyStreamEvent;
 import org.apache.commons.net.io.CopyStreamListener;
 import org.apache.commons.net.util.TrustManagerUtils;
 
+/**
+* FTP client program created using Apache Commons Net.
+*
+* @author Ryan Riehl <ryanpriehl@gmail.com>
+*/
 public class Assn3 {
 
     public static void main(String[] args) throws IOException {
@@ -137,7 +142,7 @@ public class Assn3 {
                         }
                         break;
 
-                    // TODO
+                    // Puts a file or directory
                     case "put":
                         File file = new File(parameter);
                         if(!file.exists()){
